@@ -2,6 +2,8 @@
 
 一个给家人使用的微信小程序：查看预置菜品和原料，选择自己的家庭身份，点菜或取消，并查看全家的共享菜单。
 
+Family meal-ordering mini program for browsing dishes, checking ingredients, and sharing everyone's choices.
+
 ## 当前功能
 
 - 所有菜：分类浏览 7 道示例菜，查看当前点菜人和人数
