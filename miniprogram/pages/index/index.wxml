@@ -1,0 +1,67 @@
+<view class="page safe-bottom">
+  <view class="hero">
+    <view class="hero-top">
+      <view>
+        <view class="eyebrow">家的味道</view>
+        <view class="title">今天想吃什么？</view>
+      </view>
+      <button class="member-pill" bindtap="openMemberSheet">
+        <text>{{member ? member.emoji : '🙂'}}</text>
+        <text>{{member ? member.name : '选择身份'}}</text>
+        <text class="chevron">⌄</text>
+      </button>
+    </view>
+    <view class="hero-card" bindtap="goOrders">
+      <view>
+        <view class="hero-card-title">全家点菜单</view>
+        <view class="hero-card-copy">看看大家都想吃什么</view>
+      </view>
+      <view class="hero-card-action">去看看 <text>→</text></view>
+    </view>
+  </view>
+
+  <scroll-view class="category-scroll" scroll-x enhanced show-scrollbar="false">
+    <view class="category-row">
+      <view wx:for="{{categories}}" wx:key="*this" class="category {{activeCategory === item ? 'active' : ''}}" data-category="{{item}}" bindtap="chooseCategory">{{item}}</view>
+    </view>
+  </scroll-view>
+
+  <view class="section-head">
+    <view class="section-title">{{activeCategory === '全部' ? '家常好菜' : activeCategory}}</view>
+    <view class="section-note">{{visibleDishes.length}} 道</view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">正在准备菜单…</view>
+  <view class="dish-list" wx:else>
+    <view class="dish-card" wx:for="{{visibleDishes}}" wx:key="id">
+      <view class="dish-main" data-id="{{item.id}}" bindtap="openDetail">
+        <view class="dish-art" style="background: {{item.color}}">{{item.emoji}}</view>
+        <view class="dish-info">
+          <view class="dish-name">{{item.name}}</view>
+          <view class="dish-subtitle">{{item.subtitle}}</view>
+          <view class="picked" wx:if="{{item.orderCount}}">{{item.memberNames}}想吃</view>
+          <view class="picked muted" wx:else>还没人点，等你开场</view>
+        </view>
+      </view>
+      <button class="order-button {{item.selected ? 'selected' : ''}}" data-id="{{item.id}}" bindtap="toggle">
+        {{item.selected ? '已点 ✓' : '点菜'}}
+      </button>
+    </view>
+  </view>
+
+  <view class="mode-tip" wx:if="{{!cloudEnabled}}">当前为本机体验模式 · 配置云环境后可与家人同步</view>
+</view>
+
+<view class="sheet-mask" wx:if="{{showMemberSheet}}" bindtap="closeMemberSheet">
+  <view class="member-sheet" catchtap="swallow">
+    <view class="sheet-handle"></view>
+    <view class="sheet-title">先告诉我你是谁</view>
+    <view class="sheet-copy">选择后会记住你，下次打开不用再选</view>
+    <view class="member-grid">
+      <button class="member-card" wx:for="{{members}}" wx:key="id" data-id="{{item.id}}" bindtap="selectMember">
+        <view class="member-avatar" style="background: {{item.color}}">{{item.emoji}}</view>
+        <view>{{item.name}}</view>
+      </button>
+    </view>
+  </view>
+</view>

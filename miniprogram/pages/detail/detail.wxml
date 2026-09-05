@@ -1,0 +1,33 @@
+<view class="page safe-bottom" wx:if="{{dish}}">
+  <view class="cover" style="background: {{dish.color}}">
+    <view class="cover-glow"></view>
+    <view class="cover-emoji">{{dish.emoji}}</view>
+    <view class="category-tag">{{dish.category}}</view>
+  </view>
+  <view class="content-card">
+    <view class="dish-title">{{dish.name}}</view>
+    <view class="dish-meta">{{dish.subtitle}}</view>
+    <view class="description">{{dish.description}}</view>
+
+    <view class="picked-panel" wx:if="{{orderCount}}">
+      <view class="picked-icon">♥</view>
+      <view>
+        <view class="picked-title">{{orderCount}} 位家人想吃</view>
+        <view class="picked-names">{{memberNames}}</view>
+      </view>
+    </view>
+
+    <view class="section-title"><text>所需原料</text><text class="ingredient-count">{{dish.ingredients.length}} 种</text></view>
+    <view class="ingredient-list">
+      <view class="ingredient" wx:for="{{dish.ingredients}}" wx:key="name">
+        <view class="ingredient-dot"></view>
+        <view class="ingredient-name">{{item.name}}</view>
+        <view class="ingredient-amount">{{item.amount}}</view>
+      </view>
+    </view>
+  </view>
+  <view class="bottom-action">
+    <view class="identity"><text>{{member ? member.emoji : '🙂'}}</text><text>{{member ? member.name : '未选择身份'}}</text></view>
+    <button class="primary-button {{selected ? 'selected' : ''}}" loading="{{busy}}" bindtap="toggle">{{selected ? '取消点菜' : '点这道菜'}}</button>
+  </view>
+</view>

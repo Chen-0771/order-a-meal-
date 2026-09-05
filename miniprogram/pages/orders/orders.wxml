@@ -1,0 +1,37 @@
+<view class="page safe-bottom">
+  <view class="summary-card" wx:if="{{orderedDishes.length}}">
+    <view class="summary-eyebrow">本次家庭菜单</view>
+    <view class="summary-row">
+      <view><text class="summary-number">{{orderedDishes.length}}</text><text class="summary-unit"> 道菜</text></view>
+      <view class="summary-people">{{totalPeople}} 位家人参与</view>
+    </view>
+    <view class="summary-line"></view>
+    <view class="summary-tip">下拉刷新，就能看到家人的最新选择</view>
+  </view>
+
+  <view class="section-head" wx:if="{{orderedDishes.length}}">
+    <view class="section-title">大家想吃</view>
+    <view class="section-note">{{member ? member.name + '的选择可取消' : '先选择身份'}}</view>
+  </view>
+
+  <view class="order-list" wx:if="{{orderedDishes.length}}">
+    <view class="order-card" wx:for="{{orderedDishes}}" wx:key="id">
+      <view class="dish-art" style="background: {{item.color}}" data-id="{{item.id}}" bindtap="openDetail">{{item.emoji}}</view>
+      <view class="order-info" data-id="{{item.id}}" bindtap="openDetail">
+        <view class="order-name">{{item.name}}</view>
+        <view class="order-by">{{item.memberNames}}</view>
+        <view class="order-count">{{item.orderCount}} 人想吃</view>
+      </view>
+      <button wx:if="{{item.selected}}" class="cancel-button" data-id="{{item.id}}" bindtap="cancel">取消</button>
+      <view wx:else class="arrow" data-id="{{item.id}}" bindtap="openDetail">›</view>
+    </view>
+  </view>
+
+  <view class="empty-state" wx:elif="{{!loading}}">
+    <view class="empty-icon">🍽️</view>
+    <view class="empty-title">菜单还是空的</view>
+    <view>去挑几道家人爱吃的菜吧</view>
+    <button class="browse-button" bindtap="goBrowse">去点菜</button>
+  </view>
+  <view class="loading" wx:else>正在同步菜单…</view>
+</view>

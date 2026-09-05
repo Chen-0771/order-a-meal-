@@ -1,0 +1,26 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/orders/orders",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "navigationBarTitleText": "点个菜吧",
+    "navigationBarBackgroundColor": "#FFF9F2",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFF9F2",
+    "backgroundTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#8A8279",
+    "selectedColor": "#E65F38",
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "所有菜" },
+      { "pagePath": "pages/orders/orders", "text": "已点菜单" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}
